@@ -25,8 +25,8 @@ VueRouter.prototype.replace=function(localData,resolve,reject){
 // 引入外部路由组件
 import Home from "@/pages/Home/Home.vue"; 
 import Search from "@/pages/Search";
-import Login from "@/pages/Login/Login.vue";
-import Register from "@/pages/Register/Register.vue";
+import Login from "@/pages/Login";
+import Register from "@/pages/Register";
 import Detail from "@/pages/Detail/index.vue";
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'

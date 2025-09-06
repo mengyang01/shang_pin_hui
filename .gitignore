@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 /dist
-
+参考资料
+自己笔记.md
 
 # local env files
 .env.local
