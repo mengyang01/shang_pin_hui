@@ -1,0 +1,137 @@
+{
+  "code": 200,
+  "message": "成功",
+  "data": {
+    "valuesSkuJson": "{\"2|4|7\":1,\"2|5|7\":2,\"1|4|7\":3,\"1|5|7\":4,\"3|4|7\":5,\"3|5|7\":6}",
+    "price": 5499,
+    "categoryView": {
+      "id": 61,
+      "category1Id": 2,
+      "category1Name": "手机",
+      "category2Id": 13,
+      "category2Name": "手机通讯",
+      "category3Id": 61,
+      "category3Name": "手机"
+    },
+    "spuSaleAttrList": [
+      {
+        "id": 1,
+        "spuId": 1,
+        "baseSaleAttrId": 1,
+        "saleAttrName": "选择颜色",
+        "spuSaleAttrValueList": [
+          {
+            "id": 1,
+            "saleAttrValueName": "黑色",
+            "isChecked": "0"
+          },
+          {
+            "id": 2,
+            "saleAttrValueName": "红色",
+            "isChecked": "1"
+          },
+          {
+            "id": 3,
+            "saleAttrValueName": "星光色",
+            "isChecked": "0"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "spuId": 1,
+        "baseSaleAttrId": 2,
+        "saleAttrName": "选择版本",
+        "spuSaleAttrValueList": [
+          {
+            "id": 4,
+            "saleAttrValueName": "64GB",
+            "isChecked": "1"
+          },
+          {
+            "id": 5,
+            "saleAttrValueName": "128GB",
+            "isChecked": "0"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "spuId": 1,
+        "baseSaleAttrId": 3,
+        "saleAttrName": "选择套装",
+        "spuSaleAttrValueList": [
+          {
+            "id": 7,
+            "saleAttrValueName": "官方标配",
+            "isChecked": "1"
+          },
+          {
+            "id": 8,
+            "saleAttrValueName": "快充套装",
+            "isChecked": "0"
+          }
+        ]
+      }
+    ],
+    "skuInfo": {
+      "id": 1,
+      "spuId": 1,
+      "price": 5499,
+      "skuName": "Apple iPhone 13 (A2634) 128GB 红色 移动联通电信双卡双待",
+      "skuDesc": "【旗舰机型】A15仿生芯片 | 超视网膜XDR显示屏 | 电影模式 | IP68防水防尘",
+      "weight": "0.3",
+      "tmId": 1,
+      "category3Id": 61,
+      "skuDefaultImg": "./images/mobile01.png",
+      "isSale": 1,
+      "skuImageList": [
+        {
+          "id": 1,
+          "imgName": "main.jpg",
+          "imgUrl": "./images/mobile02.png",
+          "isDefault": "1"
+        },
+        {
+          "id": 2,
+          "imgName": "angle.jpg",
+          "imgUrl": "./images/mobile03.png",
+          "isDefault": "0"
+        },
+        {
+          "id": 3,
+          "imgName": "back.jpg",
+          "imgUrl": "./images/mobile04.png",
+          "isDefault": "0"
+        }
+      ],
+      "skuAttrValueList": [
+        {
+          "id": 1,
+          "attrId": 1,
+          "valueId": 3,
+          "valueName": "品牌",
+          "attrName": "Apple"
+        },
+        {
+          "id": 2,
+          "attrId": 2,
+          "valueId": 6,
+          "valueName": "型号",
+          "attrName": "iPhone 13"
+        }
+      ],
+      "skuSaleAttrValueList": [
+        {
+          "saleAttrValueName": "红色",
+          "saleAttrName": "颜色"
+        },
+        {
+          "saleAttrValueName": "128GB",
+          "saleAttrName": "版本"
+        }
+      ]
+    }
+  },
+  "ok": true
+}

@@ -3,6 +3,36 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
+
+import "../server/mock/mockServer.js" //启动mock模拟服务器
+
+//引入swiper样式
+import 'swiper/css/swiper.css';
+
+
+// 定义全局组件，其他人直接用即可，无需二次注册
+import  TypeNav  from '@/components/TypeNav/index.vue'
+import Banner from '@/components/Banner' 
+import Pagination from '@/components/Pagination' 
+
+// 注册全局组件,第一个参数：组件名字，第二个参数：哪个组件
+Vue.component(TypeNav.name,TypeNav)   //TypeNav三级分类
+Vue.component(Banner.name,Banner)//Banner轮播图
+Vue.component(Pagination.name,Pagination)//分页器
+
+import router from './router' // 引入路由配置
+import store from './store'   //引入Vuex大仓库
+
+// 测试接口是否正常
+// import {TypeNav as TypeNa} from './api'
+// TypeNa()
+
+
 new Vue({
+  beforeCreate(){
+    Vue.prototype.$bus=this;
+  },
   render: h => h(App),
-}).$mount('#app')
+  router,
+  store,
+}).$mount(' #app')
