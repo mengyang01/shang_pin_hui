@@ -56,4 +56,15 @@ export const reqChangeChecked=(skuId,isChecked)=>mock({
   method:'get'
 })
 
+// 注册时发送验证码
+export const reqGetcode=(phone)=>mock({
+  url:`/user/passport/sendCode/${phone}`,
+  method:'get',
+})
 
+// 完成注册
+export const reqRegisterStatus=(userdata)=>mock({
+  url:'/user/passport/register',
+  method:'post',
+  data:userdata
+})

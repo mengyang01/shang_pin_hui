@@ -204,3 +204,26 @@ Mock.mock(/\/mock\/cart\/checkCart\/\d+\/[01]/, "get", function(options) {
     ok: true
   };
 });
+
+
+// /user/passport/sendCode
+// 发送验证码
+Mock.mock(/\/mock\/user\/passport\/sendCode\/\d+/, "get", function (options) {
+  return {
+    code: 200,
+    message: "成功",
+    data: "800473",
+    ok: true,
+  };
+});
+
+// 完成注册
+// /user/passport/register
+Mock.mock("/mock/user/passport/register", "post", function (options) {
+  return {
+    code: 200,
+    message: "成功",
+    data: null,
+    ok: true,
+  };
+});

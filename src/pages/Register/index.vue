@@ -8,32 +8,33 @@
       </h3>
       <div class="content">
         <label>手机号:</label>
-        <input type="text" placeholder="请输入你的手机号">
+        <input type="text" placeholder="请输入你的手机号" v-model="phone">
         <span class="error-msg">错误提示信息</span>
       </div>
       <div class="content">
         <label>验证码:</label>
-        <input type="text" placeholder="请输入验证码">
-        <img ref="code" src="http://182.92.128.115/api/user/passport/code" alt="code">
+        <input type="text" placeholder="请输入验证码" v-model="code">
+        <!-- <img ref="code" src="http://182.92.128.115/api/user/passport/code" alt="code"> -->
         <span class="error-msg">错误提示信息</span>
+        <button class="code" @click="getCode">发送验证码</button>
       </div>
       <div class="content">
         <label>登录密码:</label>
-        <input type="text" placeholder="请输入你的登录密码">
+        <input type="password" placeholder="请输入你的登录密码" v-model="password">
         <span class="error-msg">错误提示信息</span>
       </div>
       <div class="content">
         <label>确认密码:</label>
-        <input type="text" placeholder="请输入确认密码">
+        <input type="password" placeholder="请输入确认密码" v-model="password1">
         <span class="error-msg">错误提示信息</span>
       </div>
       <div class="controls">
-        <input name="m1" type="checkbox">
+        <input name="m1" type="checkbox" ref="m1">
         <span>同意协议并注册《尚品汇用户协议》</span>
         <span class="error-msg">错误提示信息</span>
       </div>
       <div class="btn">
-        <button>完成注册</button>
+        <button @click="doneRegister">完成注册</button>
       </div>
     </div>
 
@@ -58,7 +59,54 @@
 
 <script>
   export default {
-    name: 'Register'
+    name: 'Register',
+    data(){
+      return {
+        phone:'',
+        code:'',
+        password:'',
+        password1:'',
+      }
+    },
+    methods:{
+      // 发送验证码
+      async getCode(){
+        let {phone}=this
+        try{
+          // 有号码时才能继续发送验证码
+          // phone&&await this.$store.dispatch('user/getCode',phone)--简便写法
+          if(phone){
+            await this.$store.dispatch('user/getCode',phone)
+            this.code=this.$store.state.user.code
+          }
+          else
+            alert('请输入手机号')          
+        }catch(e){
+          alert(e.message)
+        }
+      },
+      // 点击完成注册
+      async doneRegister(){
+        let {phone,code,password,password1}=this
+        let isChecked=this.$refs.m1.checked
+        try{
+          // 验证是否获取验证码、两次密码是否一致、协议是否勾选
+            // code&&
+            // (password===password1)&&
+            // isChecked&&
+            //   await this.$store.dispatch('user/doneRegister',{phone,code,password})
+          if(code&&password===password1&&isChecked){
+            await this.$store.dispatch('user/doneRegister',{phone,code,password})
+            // 跳转路由到登录页
+            alert('注册成功')
+            this.$router.push({path:'/login'})
+          }
+        }catch(e){
+          alert(e.message)
+        }
+
+      }
+    }
   }
 </script>
 
@@ -141,6 +189,14 @@
           left: 495px;
           color: red;
         }
+      }
+
+      .code{
+        margin-left:1rem;
+        width:5rem;
+        height:2rem;
+        text-align: center;
+        
       }
 
       .btn {
