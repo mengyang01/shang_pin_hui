@@ -14,7 +14,7 @@ requests.interceptors.request.use(
   (config)=>{// 成功的回调
       nProgress.start()// 开始进度条计时
         // config：配置对象，包含headers请求头
-      if(store.state.shopcart.shopCartList){
+      if(store.state.shopcart.tempId){
         config.headers.userTempId=store.state.shopcart.shopCartList
       }
         

@@ -245,18 +245,19 @@ Mock.mock("/mock/user/passport/login", "post", function (options) {
 
 // 获取用户信息
 Mock.mock("/mock/user/passport/auth/getUserInfo", "get", function (options) {
-  return {
-    code: 200,
-    message: "成功",
-    data: {
-      name: "Admin",
-      nickName: "Administrator",
-      email: "UPD@qq.com",
-      id: 2,
-      loginName:"137000000000"
-    },
-    ok: true,
-  };
+  if(options.body==='123456789123456789')
+    return {
+      code: 200,
+      message: "成功",
+      data: {
+        name: "Admin",
+        nickName: "Administrator",
+        email: "UPD@qq.com",
+        id: 2,
+        loginName:"137000000000",
+      },
+      ok: true,
+    };
 });
 
 // 退出登录

@@ -63,10 +63,10 @@ export const reqGetcode=(phone)=>mock({
 })
 
 // 完成注册
-export const reqRegisterStatus=(userdata)=>mock({
+export const reqRegisterStatus=(logindata)=>mock({
   url:'/user/passport/register',
   method:'post',
-  data:userdata
+  data:logindata
 })
 
 // 登录业务
@@ -74,4 +74,17 @@ export const reqLogin=(logindata)=>mock({
   url:'/user/passport/login',
   method:'post',
   data:logindata
+})
+
+// 通过token获取用户账户信息
+export const reqUserdata=(token)=>mock({
+  url:'/user/passport/auth/getUserInfo',
+  method:'get',
+  data:token
+})
+
+// 退出登录
+export const reqLogout=()=>mock({
+  url:'/user/passport/logout',
+  method:'get'
 })

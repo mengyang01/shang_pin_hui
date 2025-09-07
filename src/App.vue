@@ -14,6 +14,7 @@ export default {
   name:'App',
   components:{Header,Footer},
   mounted() {
+    // 请求三级联动数据，公用的
     this.$store.dispatch("home/TypeNavList");
     if (this.$route.path !== "/home") {
       this.listShow = false;

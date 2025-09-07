@@ -79,12 +79,13 @@
       async login(){
         try{
           let {account,password}=this
-          if(account&&password)
+          if(account&&password){
             await this.$store.dispatch('user/login',{account,password})
-          // 跳转路由
-          this.$router.push({
-            path:'/home'
-          })
+            // 跳转路由
+            this.$router.push({
+              path:'/home'
+            })
+          }
         }catch(e){
           alert(e.message)
         }

@@ -4,7 +4,7 @@
     <!-- 头部的第一行 -->
     <div class="top">
       <div class="container">
-        <div class="loginList">
+        <div class="loginList" v-if="!userName">
           <p>尚品汇欢迎您！</p>
           <p>
             <span>请</span>
@@ -12,6 +12,15 @@
             <router-link to="/register" class="register">免费注册</router-link>
           </p>
         </div>
+        <div class="loginList" v-else>
+          <p>尚品汇欢迎您！</p>
+          <p>
+            <span>您好,&nbsp;</span>
+            <span>{{ userName }}&nbsp;|&nbsp;</span>
+            <a href="javascript:void(0)" @click="logout">退出登录</a>
+          </p>          
+        </div>
+
         <div class="typeList">
           <a href="###">我的订单</a>
           <a href="###">我的购物车</a>
@@ -60,16 +69,31 @@ export default {
       searchContent:''
     }
   },
+  computed:{
+    userName(){
+      return this.$store.state.user.userdata.name
+    }
+  },
   methods:{
+    // 搜索时路由跳转
     searchRoute(){
       let location={name:'search',params:{keyword:this.searchContent||undefined}}
       if(this.$route.query){
         location.query=this.$route.query
       }
       this.$router.push(location)
+    },
+    // 退出登录
+    async logout(){
+      try{
+        await this.$store.dispatch('user/logout')
+      }catch(e){
+        alert(e.message)
+      }
     }
   },
   mounted(){
+    // 挂载总线事件
     this.$bus.$on('clear',()=>{
       this.searchContent = '';
     })
