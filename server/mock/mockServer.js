@@ -227,3 +227,44 @@ Mock.mock("/mock/user/passport/register", "post", function (options) {
     ok: true,
   };
 });
+
+// 登录接口
+Mock.mock("/mock/user/passport/login", "post", function (options) {
+  return {
+    code: 200,
+    message: "成功",
+    data: {
+      name: "18944444444",
+      nickName: "18944444444",
+      token: "123456789123456789",
+      userId: 42222
+    },
+    ok: true,
+  };
+});
+
+// 获取用户信息
+Mock.mock("/mock/user/passport/auth/getUserInfo", "get", function (options) {
+  return {
+    code: 200,
+    message: "成功",
+    data: {
+      name: "Admin",
+      nickName: "Administrator",
+      email: "UPD@qq.com",
+      id: 2,
+      loginName:"137000000000"
+    },
+    ok: true,
+  };
+});
+
+// 退出登录
+Mock.mock("/mock/user/passport/logout", "get", function (options) {
+  return {
+    code: 200,
+    message: "成功",
+    data: null,
+    ok: true,
+  };
+});

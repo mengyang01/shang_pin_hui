@@ -68,3 +68,10 @@ export const reqRegisterStatus=(userdata)=>mock({
   method:'post',
   data:userdata
 })
+
+// 登录业务
+export const reqLogin=(logindata)=>mock({
+  url:'/user/passport/login',
+  method:'post',
+  data:logindata
+})

@@ -1,7 +1,10 @@
-import {reqGetcode,reqRegisterStatus} from '@/api'
+import {reqGetcode,reqRegisterStatus,reqLogin} from '@/api'
 
 const state={
-  code:''
+  // 登录验证码
+  code:'',
+  // 用户信息
+  userdata:{}
 }
 const actions={
   // 注册时发送验证码
@@ -16,22 +19,42 @@ const actions={
     }
   },
   // 完成注册
-  async doneRegister({commit},userdata){
-    let result=await reqRegisterStatus(userdata)
+  async doneRegister({commit},registerdata){
+    let result=await reqRegisterStatus(registerdata)
     if(result.code===200){
       console.log('注册状态',result)
       return '注册成功'
     }else{
       return Promise.reject(new Error('注册失败'))
     }
+  },
+  // 登录业务
+  async login({commit},logindata){
+    let result=await reqLogin(logindata)
+    if(result.code===200){
+      commit('LOGIN',result.data)
+      return '登录成功'
+    }else{
+      return Promise.reject(new Error('登录失败'))
+    }
   }
 }
 const mutations={
+  // 修改验证码信息
   GETCODE(state,code){
     state.code=code
+  },
+  // 修改用户信息
+  LOGIN(state,userdata){
+    state.userdata=userdata
   }
 }
-const getters={}
+const getters={
+  // token令牌
+  token(state){
+    return state.userdata.token
+  }
+}
 
 export default {
   namespaced:true,
