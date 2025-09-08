@@ -18,6 +18,8 @@ requests.interceptors.request.use(
       // 请求头添加一个字段，该字段需要与后端沟通好
       config.headers.userTempId=store.state.shopcart.tempId
     }
+    if(store.state.user.token)
+      config.headers.token=store.state.user.token
     return config
   },
 

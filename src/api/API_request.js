@@ -17,9 +17,9 @@ requests.interceptors.request.use(
       if(store.state.shopcart.tempId){
         config.headers.userTempId=store.state.shopcart.shopCartList
       }
-        
+      if(store.state.user.token)
+        config.headers.token=store.state.user.token  
       return config   // 返回这个配置对象，如果没有返回，这个请求就不会发送出去
-
   },
   (err)=>{
       // 失败的回调，返回失败状态的Promise类型数据

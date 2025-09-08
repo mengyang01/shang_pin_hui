@@ -28,15 +28,9 @@ export default {
       FloorList:state=>state.home.FloorList
     })
   },
-  async mounted(){
+ mounted(){
     // 请求获得底层数据
     this.$store.dispatch('home/floorList');
-    // 请求获得用户账户数据
-    try{
-      await this.$store.dispatch('user/getUserdata')
-    }catch(e){
-      alert(e.message)
-    }
   },
 }
 </script>

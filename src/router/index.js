@@ -31,7 +31,11 @@ import Detail from "@/pages/Detail/index.vue";
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
 
-export default new VueRouter({
+// 引入仓库
+import store from '@/store'
+
+const router=new VueRouter({
+  // 路由内容
   routes:[
     {
       path:'/home',
@@ -93,8 +97,53 @@ export default new VueRouter({
       redirect:'/home'
     }
   ],
+  // 滚动行为控制
   scrollBehavior(to,from,savedPosition){
     //返回的y=0代表滚动条在最上方
     return {y:0}
   }
 })
+
+
+// 添加全局路由前置守卫，负责每次路由跳转前去申请账户数据、防止登录后重复跳转的问题
+router.beforeEach(async (to,from,next)=>{
+  // 获取token、userdata
+  let {token}=store.state.user
+  let {userdata}=store.state.user
+  // 如果有token，说明已经登录了，此时需要完成功能：1、禁止回到登录页；2、路由跳转前获取账户信息
+  if(token){
+    // 登录后试图再次进入登录页，导到home页去
+     if(to.path==='/login'){
+      next('/home')
+     }
+    // 登录后进入其他页，正常放行，同时要完成对账户信息的确保
+     else{
+      // 如果已经有数据，那么就不用再发请求了，直接放行【注意，空对象{}、空数组[]会被判断为真】
+      if(userdata.name)
+        next()
+      // 如果没有数据，那么就重新派发申请拿到账户信息
+      else{
+        try{
+          await store.dispatch('user/getUserdata')
+          next()
+        }catch(e){
+          // 如果获取用户信息失败，那么只能说明token过期了，首先清空过期的token和用户数据
+          // 之后需要重新登录获取token了
+          await store.dispatch('user/logout')
+          next('/login')
+        }
+      }
+     }
+  }
+  // 没有token，代表没有登录，不能去购物车页面，点击加入购物车后跳转到登录界面
+  else{ 
+    // 【加入购物车】、【查看购物车数据】时跳转到登录界面
+    if(to.path==='/addcartsuccess'||to.path==='/shopcart')
+      next('/login')
+    // 其他页面正常访问
+    else
+      next()
+  }
+})
+
+export default router
