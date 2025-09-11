@@ -158,14 +158,13 @@ export default {
               if(this.code==200){
                 clearInterval(this.timerId)
                 this.timerId=null
+                done()
                 // 路由跳转
                 this.$router.push('/paysuccess')
-                done()
               }else{
                 alert('未完成支付，请重新尝试')
               }
             }
-            
           }
         }
         // 需要在this.$alert后面加上catch捕获异常，否则点击取消按钮后会报错

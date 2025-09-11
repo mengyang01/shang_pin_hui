@@ -26,7 +26,6 @@ const actions={
   async getPayStatus({commit},orderId){
     let result = await reqPayStatus(orderId)
     return result.code
-
   }
 }
 
