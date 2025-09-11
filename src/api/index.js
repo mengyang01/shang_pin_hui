@@ -118,3 +118,9 @@ export const reqPayStatus=(orderId)=>mock({
   url:`/payment/weixin/queryPayStatus/${orderId}`,
   method:'get'
 })
+
+// 获取我的订单
+export const reqMyOreder=(page,limit)=>mock({
+  url:`/order/auth/${page}/${limit}`,
+  method:'get'
+})

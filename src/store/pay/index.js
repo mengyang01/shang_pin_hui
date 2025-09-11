@@ -25,6 +25,7 @@ const actions={
   // 查询支付状态
   async getPayStatus({commit},orderId){
     let result = await reqPayStatus(orderId)
+      // console.log('服务器返回结果了',result.code)
     return result.code
   }
 }

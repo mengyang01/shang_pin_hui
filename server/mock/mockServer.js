@@ -295,11 +295,13 @@ Mock.mock(/\/mock\/payment\/weixin\/createNative\/\d+/, "get", function (options
 
 // 获取支付订单状态
 Mock.mock(/\/mock\/payment\/weixin\/queryPayStatus\/\d+/, "get", function (options) {
-
-  setTimeout(()=>{
-    paySuccessInfo.code=200
-    paySuccessInfo.message="支付成功"
-  },3000)
+  let timerId
+  if(!timerId)
+    timerId=setTimeout(()=>{
+      paySuccessInfo.code=200
+      paySuccessInfo.message="支付成功"
+      timerId=null
+    },5000)
 
   return paySuccessInfo
 });

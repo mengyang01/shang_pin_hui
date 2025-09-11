@@ -33,6 +33,11 @@ import ShopCart from '@/pages/ShopCart'
 import Trade from '@/pages/Trade'
 import Pay from "@/pages/Pay"
 import PaySuccess from '@/pages/PaySuccess'
+import Center from '@/pages/Center'
+
+// 二级路由
+import MyOrder from '@/pages/Center/MyOrder'
+import GroupOrder from '@/pages/Center/GroupOrder'
 
 // 引入仓库
 import store from '@/store'
@@ -127,7 +132,28 @@ const router=new VueRouter({
         isFooterShow:true
       }
     },
-
+    // 我的订单--二级路由处理
+    {
+      path:'/center',
+      name:'Center',
+      component:Center,
+      meta:{
+        isFooterShow:true
+      },
+      children:[
+        // 二级路由path要么写全，要么不写父级只写自己名字(不带/)
+        {
+          path:'/center/myorder',
+          component:MyOrder,
+        },
+        {
+          path:'grouporder',
+          component:GroupOrder,
+        },
+      ],
+      // 重定向
+      redirect:'/center/myorder'
+    },
 
     // 来个重定向，一点进网址就是首页,意思就是访问"/"根文件时，导到"/home"路径上
     {
@@ -179,7 +205,7 @@ router.beforeEach(async (to,from,next)=>{
   // 没有token，代表没有登录，不能去购物车页面，点击加入购物车后跳转到登录界面
   else{ 
     // 【加入购物车】、【查看购物车数据】时跳转到登录界面
-    if(to.path==='/addcartsuccess'||to.path==='/shopcart')
+    if(to.path==='/addcartsuccess'||to.path==='/shopcart'||to.path==='/trade'||to.path==='/pay'||to.path==='/paysuccess'||to.path==='/center')
       next('/login')
     // 其他页面正常访问
     else

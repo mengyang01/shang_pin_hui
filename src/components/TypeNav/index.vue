@@ -16,7 +16,7 @@
                 :class="{ hov: hovIndex === index }"
               >
                 <h3>
-                  <a href="" :data-TypeName="t1.name" :data-TypeId1="t1.id"
+                  <a href="javascript:void(0)" :data-TypeName="t1.name" :data-TypeId1="t1.id"
                     >{{ t1.name }}---{{ index }}</a
                   >
                 </h3>
@@ -28,7 +28,7 @@
                     <dl class="fore">
                       <dt>
                         <a
-                          href=""
+                          href="javascript:void(0)"
                           :data-TypeName="t2.name"
                           :data-TypeId2="t2.id"
                           >{{ t2.name }}</a
@@ -37,7 +37,7 @@
                       <dd>
                         <em v-for="t3 in t2.children" :key="t3.id">
                           <a
-                            href=""
+                            href="javascript:void(0)"
                             :data-TypeName="t3.name"
                             :data-TypeId3="t3.id"
                             >{{ t3.name }}</a
@@ -53,14 +53,14 @@
         </transition>
       </div>
       <nav class="nav">
-        <a href="###">服装城</a>
-        <a href="###">美妆馆</a>
-        <a href="###">尚品汇超市</a>
-        <a href="###">全球购</a>
-        <a href="###">闪购</a>
-        <a href="###">团购</a>
-        <a href="###">有趣</a>
-        <a href="###">秒杀</a>
+        <a href="javascript:void(0)">服装城</a>
+        <a href="javascript:void(0)">美妆馆</a>
+        <a href="javascript:void(0)">尚品汇超市</a>
+        <a href="javascript:void(0)">全球购</a>
+        <a href="javascript:void(0)">闪购</a>
+        <a href="javascript:void(0)">团购</a>
+        <a href="javascript:void(0)">有趣</a>
+        <a href="javascript:void(0)">秒杀</a>
       </nav>
     </div>
   </div>
