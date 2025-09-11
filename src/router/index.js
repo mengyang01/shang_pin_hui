@@ -30,6 +30,9 @@ import Register from "@/pages/Register";
 import Detail from "@/pages/Detail/index.vue";
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
+import Trade from '@/pages/Trade'
+import Pay from "@/pages/Pay"
+import PaySuccess from '@/pages/PaySuccess'
 
 // 引入仓库
 import store from '@/store'
@@ -38,12 +41,14 @@ const router=new VueRouter({
   // 路由内容
   routes:[
     {
+      // 主页
       path:'/home',
       component:Home,
       meta:{
         isFooterShow:true
       }
     },
+      // 搜索页
     {
       path:'/search/:keyword?',
       name:'search',
@@ -52,6 +57,7 @@ const router=new VueRouter({
         isFooterShow:true
       }
     },
+      // 登录页
     {
       path:'/login',
       component:Login,
@@ -59,6 +65,7 @@ const router=new VueRouter({
         isFooterShow:false
       }
     },
+      // 注册页
     {
       path:'/register',
       component:Register,
@@ -66,6 +73,7 @@ const router=new VueRouter({
         isFooterShow:false
       }
     },
+      // 商品详情页
     {
       path:'/detail/:skuid?',//:skuid为params占位符，可以传递商品id;“?”表示参数可传可不传
       component:Detail,
@@ -83,6 +91,7 @@ const router=new VueRouter({
         isFooterShow:true
       }
     },
+    // 购物车信息
     {
       path:'/shopcart',
       component:ShopCart,
@@ -91,12 +100,43 @@ const router=new VueRouter({
         isFooterShow:true
       }
     },
+    // 交易订单
+    {
+      path:'/trade',
+      component:Trade,
+      name:'Trade',
+      meta:{
+        isFooterShow:true
+      }
+    },
+    // 支付页
+    {
+      path:'/pay',
+      component:Pay,
+      name:'Pay',
+      meta:{
+        isFooterShow:true
+      }
+    },
+    // 成功支付页
+    {
+      path:'/paysuccess',
+      component:PaySuccess,
+      name:'PaySuccess',
+      meta:{
+        isFooterShow:true
+      }
+    },
+
+
     // 来个重定向，一点进网址就是首页,意思就是访问"/"根文件时，导到"/home"路径上
     {
       path:'/',
       redirect:'/home'
     }
   ],
+
+
   // 滚动行为控制
   scrollBehavior(to,from,savedPosition){
     //返回的y=0代表滚动条在最上方
@@ -113,7 +153,7 @@ router.beforeEach(async (to,from,next)=>{
   // 如果有token，说明已经登录了，此时需要完成功能：1、禁止回到登录页；2、路由跳转前获取账户信息
   if(token){
     // 登录后试图再次进入登录页，导到home页去
-     if(to.path==='/login'){
+     if(to.path==='/login'||to.path==='/register'){
       next('/home')
      }
     // 登录后进入其他页，正常放行，同时要完成对账户信息的确保
@@ -130,6 +170,7 @@ router.beforeEach(async (to,from,next)=>{
           // 如果获取用户信息失败，那么只能说明token过期了，首先清空过期的token和用户数据
           // 之后需要重新登录获取token了
           await store.dispatch('user/logout')
+          // 这里与上面的有token进入home页的设置并不冲突，因为会logout先删除token，然后就可以进入到登录页了
           next('/login')
         }
       }

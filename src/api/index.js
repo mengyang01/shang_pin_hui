@@ -88,3 +88,33 @@ export const reqLogout=()=>mock({
   url:'/user/passport/logout',
   method:'get'
 })
+
+// 以下交易订单页以及支付页接口
+
+// 获取用户地址信息接口
+export const reqAddress=()=>mock({
+  url:"/user/userAddress/auth/findUserAddressList",
+  method:'get'
+})
+// 获取交易页商品信息
+export const reqTradeInfo=()=>mock({
+  url:'/order/auth/trade',
+  method:'get'
+})
+// 提交订单
+export const reqsubmitOrder=(tradeNo,data)=>mock({
+  url:`/order/auth/submitOrder?tradeNo=${tradeNo}`,
+  method:'post',
+  data
+})
+// 根据订单号查找交易订单支付信息
+export const reqOrderBuyInfo=(orderId)=>mock({
+  url:`/payment/weixin/createNative/${orderId}`,
+  method:'get'
+})
+
+// 获取支付状态
+export const reqPayStatus=(orderId)=>mock({
+  url:`/payment/weixin/queryPayStatus/${orderId}`,
+  method:'get'
+})

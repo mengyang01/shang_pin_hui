@@ -5,7 +5,7 @@ import banner from './banner.json'
 import floors from './floors.json'
 import goodDetailInfo from './goodDetailInfo.json'
 import shopCartInfo from './shopCartInfo'
-
+import { userAddress, tradeInfo, sumitOrderSuccess, paymentInfo, paySuccessInfo, myOrderInfo } from "./tradeData";
 // 配置数据
 Mock.mock('/mock/banner', { code: 200, data: banner })
 Mock.mock('/mock/floors', { code: 200, data: floors })
@@ -269,3 +269,43 @@ Mock.mock("/mock/user/passport/logout", "get", function (options) {
     ok: true,
   };
 });
+
+
+// 以下是订单trade模块的mock接口
+
+// mock获取用户地址信息
+Mock.mock("/mock/user/userAddress/auth/findUserAddressList", "get", function (options) {
+  return userAddress;
+});
+
+// 获取交易页商品信息
+Mock.mock("/mock/order/auth/trade", "get", function (options) {
+  return tradeInfo;
+});
+
+// 提交订单
+Mock.mock(/\/mock\/order\/auth\/submitOrder(\?.*)?/, "post", function (options) {
+  return sumitOrderSuccess;
+});
+
+// 微信支付接口 /payment/weixin/createNative/${orderId}
+Mock.mock(/\/mock\/payment\/weixin\/createNative\/\d+/, "get", function (options) {
+  return paymentInfo;
+});
+
+// 获取支付订单状态
+Mock.mock(/\/mock\/payment\/weixin\/queryPayStatus\/\d+/, "get", function (options) {
+
+  setTimeout(()=>{
+    paySuccessInfo.code=200
+    paySuccessInfo.message="支付成功"
+  },3000)
+
+  return paySuccessInfo
+});
+
+// // 我的订单： /order/auth/{page}/{limit} get
+Mock.mock(/\/mock\/order\/auth\/\d+\/\d+/, "get", function (options) {
+  return myOrderInfo;
+})
+

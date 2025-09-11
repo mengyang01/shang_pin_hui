@@ -8,6 +8,9 @@ import "../server/mock/mockServer.js" //启动mock模拟服务器
 
 //引入swiper样式
 import 'swiper/css/swiper.css';
+// 按需引入element-ui组件
+import { Button ,MessageBox} from 'element-ui';
+
 
 
 // 定义全局组件，其他人直接用即可，无需二次注册
@@ -19,13 +22,14 @@ import Pagination from '@/components/Pagination'
 Vue.component(TypeNav.name,TypeNav)   //TypeNav三级分类
 Vue.component(Banner.name,Banner)//Banner轮播图
 Vue.component(Pagination.name,Pagination)//分页器
+Vue.component(Button.name,Button)//Element-ui按需引入并注册
+Vue.prototype.$msgbox = MessageBox;
+Vue.prototype.$alert = MessageBox.alert;
 
 import router from './router' // 引入路由配置
 import store from './store'   //引入Vuex大仓库
 
-// 测试接口是否正常
-// import {TypeNav as TypeNa} from './api'
-// TypeNa()
+
 
 
 new Vue({
