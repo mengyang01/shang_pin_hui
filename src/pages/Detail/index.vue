@@ -5,7 +5,7 @@
 
     <!-- 主要内容区域 -->
     <section class="con">
-      <!-- 导航路径区域 -->
+      <!-- 导航面包屑路径区域 -->
       <div class="conPoin">
         <span v-show="categoryView.category1Name">{{
           categoryView.category1Name
@@ -77,11 +77,11 @@
           <div class="choose">
             <div class="chooseArea">
               <div class="choosed"></div>
-              <dl v-for="(attr, index) in spuSaleAttrList" :key="attr.id">
+              <dl v-for="(attr) in spuSaleAttrList" :key="attr.id">
                 <dt class="title">{{ attr.saleAttrName }}</dt>
                 <dd
                   changepirce="0"
-                  v-for="(attrvalue, index) in attr.spuSaleAttrValueList"
+                  v-for="(attrvalue) in attr.spuSaleAttrValueList"
                   :key="attrvalue.id"
                   :class="{ active: attrvalue.isChecked === '1' }"
                   @click="
@@ -142,7 +142,7 @@
               <li>
                 <div class="list-wrap">
                   <div class="p-img">
-                    <img src="./images/part01.png" />
+                    <img v-lazy="`./images/part01.png`" />
                   </div>
                   <div class="attr">Apple苹果iPhone 6s (A1699)</div>
                   <div class="price">

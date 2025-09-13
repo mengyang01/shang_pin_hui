@@ -79,11 +79,12 @@
       async login(){
         try{
           let {account,password}=this
+          let toPath=this.$route.query.redirect
           if(account&&password){
             await this.$store.dispatch('user/login',{account,password})
             // 跳转路由
             this.$router.push({
-              path:'/home'
+              path:`${toPath}`
             })
           }
         }catch(e){

@@ -24,7 +24,6 @@ VueRouter.prototype.replace=function(localData,resolve,reject){
 
 // 引入外部路由组件
 import Home from "@/pages/Home/Home.vue"; 
-import Search from "@/pages/Search";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Detail from "@/pages/Detail/index.vue";
@@ -57,7 +56,7 @@ const router=new VueRouter({
     {
       path:'/search/:keyword?',
       name:'search',
-      component:Search,
+      component:()=>import ('@/pages/Search'),
       meta:{
         isFooterShow:true
       }
@@ -94,6 +93,12 @@ const router=new VueRouter({
       component:AddCartSuccess,
       meta:{
         isFooterShow:true
+      },
+      beforeEnter:(to,from,next)=>{
+        if(from.path.indexOf('/detail')!==-1)
+          next()
+        else
+          next(false)
       }
     },
     // 购物车信息
@@ -103,7 +108,7 @@ const router=new VueRouter({
       name:'ShopCart',
       meta:{
         isFooterShow:true
-      }
+      },
     },
     // 交易订单
     {
@@ -112,6 +117,12 @@ const router=new VueRouter({
       name:'Trade',
       meta:{
         isFooterShow:true
+      },
+      beforeEnter:(to,from,next)=>{
+        if(from.path=='/shopcart')
+          next()
+        else
+          next(false)
       }
     },
     // 支付页
@@ -121,6 +132,12 @@ const router=new VueRouter({
       name:'Pay',
       meta:{
         isFooterShow:true
+      },
+      beforeEnter:(to,from,next)=>{
+        if(from.path=='/trade')
+          next()
+        else
+          next(false)
       }
     },
     // 成功支付页
@@ -130,6 +147,12 @@ const router=new VueRouter({
       name:'PaySuccess',
       meta:{
         isFooterShow:true
+      },
+      beforeEnter:(to,from,next)=>{
+        if(from.path=='/pay')
+          next()
+        else
+          next(false)
       }
     },
     // 我的订单--二级路由处理
@@ -204,12 +227,18 @@ router.beforeEach(async (to,from,next)=>{
   }
   // 没有token，代表没有登录，不能去购物车页面，点击加入购物车后跳转到登录界面
   else{ 
-    // 【加入购物车】、【查看购物车数据】时跳转到登录界面
-    if(to.path==='/addcartsuccess'||to.path==='/shopcart'||to.path==='/trade'||to.path==='/pay'||to.path==='/paysuccess'||to.path==='/center')
-      next('/login')
+    let forbidPage=['/addcartsuccess', '/shopcart', '/trade', '/pay', '/paysuccess', '/center']
+    // 【加入购物车】、【查看购物车数据】时跳转到登录界面,并且需要登录之后仍然回到原来意向页面
+    
+    if(forbidPage.includes(to.matched[0].path)){
+      let toPath=to.path
+      next('/login?redirect='+toPath)
+    }
     // 其他页面正常访问
-    else
+    else{
       next()
+    }
+      
   }
 })
 

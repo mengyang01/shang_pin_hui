@@ -8,7 +8,7 @@
       >
         <img
           :src="slide.imgUrl"
-          :class="{ active: currentIndex == index }"
+          :class="{ 'active': currentIndex == index }"
           @click="chooseImg(index)"
         />
       </div>

@@ -23,7 +23,7 @@
       <div class="orders">
         <table
           class="order-item"
-          v-for="(item, index) in myorderInfo.records"
+          v-for="item in myorderInfo.records"
           :key="item.id"
         >
           <!-- 订单日期与编号 -->

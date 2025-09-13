@@ -10,7 +10,15 @@ import "../server/mock/mockServer.js" //启动mock模拟服务器
 import 'swiper/css/swiper.css';
 // 按需引入element-ui组件
 import { Button ,MessageBox} from 'element-ui';
-
+// 引入vue-lazyload
+import VueLazyload from 'vue-lazyload'
+// 引入占位图片
+import loadingGif from './assets/1.gif'
+import errorGif from './assets/2.gif'
+Vue.use(VueLazyload,{
+  loading:loadingGif,//加载中占位图片
+  error:errorGif//加载失败占位图片
+})
 
 
 // 定义全局组件，其他人直接用即可，无需二次注册
